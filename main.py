@@ -109,11 +109,11 @@ def get_win_move(board, board_null, win_type):
         #  [0,0,0]]
 
         # So, the winning move is either in the first or last positions of the current row
-        poss_win_moves = [(win_type[1], 0), (win_type[1], -1)]
+        poss_win_moves = [(win_type[1], i) for i in range(board.shape[0])]
     elif win_type[0] == 'col':
         # the situation is similar to the row case, but just in terms of columns
         # indices will flip
-        poss_win_moves = [(0, win_type[1]), (-1, win_type[1])]
+        poss_win_moves = [(i, win_type[1]) for i in range(board.shape[0])]
     elif win_type[0] == 'main_diag':
         # Scenarios:
         # [[1,0,0],
@@ -124,7 +124,7 @@ def get_win_move(board, board_null, win_type):
         #  [0,1,0],
         #  [0,0,1]]
 
-        poss_win_moves = [(0, 0), (-1, -1)]
+        poss_win_moves = [(i, i) for i in range(board.shape[0])]
     elif win_type[0] == 'other_diag':
         # Scenarios:
         # [[0,0,1],
@@ -134,8 +134,9 @@ def get_win_move(board, board_null, win_type):
         # [[0,0,0],
         #  [0,1,0],
         #  [1,0,0]]
+        # 2,0; 1,1; 0,2 
 
-        poss_win_moves = [(0, -1), (-1, 0)]
+        poss_win_moves = [(2,0), (1,1), (0,2)]
 
     # return empty position of possible win moves list
     return pick_empty_pos(board, board_null, poss_win_moves)
